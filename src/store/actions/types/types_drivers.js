@@ -1,0 +1,17 @@
+//random_tests
+export const LOAD_RANDOM_TESTS = 'LOAD_RANDOM_TESTS';
+export const LOADING_RANDOM_TESTS = 'LOADING_RANDOM_TESTS';
+export const DELETE_RANDOM_TEST = 'DELETE_RANDOM_TEST';
+export const ADD_RANDOM_TEST = 'ADD_RANDOM_TEST';
+//drivers
+export const LOAD_DRIVERS = 'LOAD_DRIVERS';
+export const LOADING_DRIVERS = 'LOADING_DRIVERS';
+export const DELETE_DRIVER = 'DELETE_DRIVER';
+export const ADD_DRIVER = 'ADD_DRIVER';
+export const GET_DRIVER = 'GET_DRIVER';
+export const EDIT_DRIVER = 'EDIT_DRIVER';
+//errors
+export const ERROR_ADDING_DRIVER = 'ERROR_ADDING_DRIVER';
+export const ERROR_EDiTING_DRIVER = 'ERROR_EDiTING_DRIVER';
+export const RESET_ERRORS = 'RESET_ERRORS';
+export const CLEAN_MODIFIED = 'CLEAN_MODIFIED';

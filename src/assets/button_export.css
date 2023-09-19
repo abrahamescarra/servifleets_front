@@ -1,0 +1,36 @@
+.button_light {
+    background: none;
+    border-width: 2px;
+    border-color: #2196f3;
+    border-style: solid;
+    max-height: 45px;
+    min-height: 45px;
+    max-width: 110px;
+    min-width: 110px;
+    background-color: #2196f3;
+    font-size: 120%;
+    color: white;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.button_dark {
+    background: none;
+    border-width: 2px;
+    border-color: #1565c0;
+    border-style: solid;
+    max-height: 45px;
+    min-height: 45px;
+    max-width: 110px;
+    min-width: 110px;
+    background-color: #1565c0;
+    font-size: 120%;
+    color: white;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
