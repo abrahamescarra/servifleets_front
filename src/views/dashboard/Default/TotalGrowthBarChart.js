@@ -1,29 +1,18 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Typography } from '@mui/material';
-
-// third-party
-import ApexCharts from 'apexcharts';
-import Chart from 'react-apexcharts';
-
-// project imports
-import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowthBarChart';
 import MainCard from 'ui-component/cards/MainCard';
+import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
-import './prueba.css';
-// chart data
-// ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const TotalGrowthBarChart = ({ isLoading, values }) => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     const darkMode = useSelector((state) => state.customization.dark);
 
-    const { navType } = customization;
     const { primary } = theme.palette.text;
     const darkLight = darkMode ? theme.palette.grey[500] : theme.palette.dark;
     const grey200 = theme.palette.grey[200];
@@ -33,116 +22,6 @@ const TotalGrowthBarChart = ({ isLoading, values }) => {
     const primaryDark = theme.palette.primary.dark;
     const secondaryMain = theme.palette.secondary.main;
     const secondaryLight = theme.palette.secondary.light;
-
-    const chartData = {
-        height: 300,
-        type: 'bar',
-        options: {
-            chart: {
-                id: 'bar-chart',
-                stacked: true,
-                toolbar: {
-                    show: true
-                },
-                zoom: {
-                    enabled: true
-                }
-            },
-            responsive: [
-                {
-                    breakpoint: 480,
-                    options: {
-                        legend: {
-                            position: 'bottom',
-                            offsetX: -10,
-                            offsetY: 0
-                        }
-                    }
-                }
-            ],
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '50%'
-                }
-            },
-            xaxis: {
-                type: 'category',
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            legend: {
-                show: true,
-                fontSize: '14px',
-                fontFamily: `'Roboto', sans-serif`,
-                position: 'bottom',
-                offsetX: 20,
-                labels: {
-                    useSeriesColors: false
-                },
-                markers: {
-                    width: 16,
-                    height: 16,
-                    radius: 5
-                },
-                itemMargin: {
-                    horizontal: 15,
-                    vertical: 8
-                }
-            },
-            fill: {
-                type: 'solid'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            grid: {
-                show: true
-            }
-        },
-        series: [
-            {
-                name: 'Earnings',
-                data: values
-            }
-        ]
-    };
-
-    useEffect(() => {
-        const newChartData = {
-            ...chartData.options,
-            colors: [primaryDark],
-            xaxis: {
-                labels: {
-                    style: {
-                        colors: [primary, primary, primary, primary, primary, primary, primary, primary, primary, primary, primary, primary]
-                    }
-                }
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: [primary]
-                    }
-                }
-            },
-            grid: {
-                borderColor: grey200
-            },
-            tooltip: {
-                theme: darkMode ? 'dark' : 'light'
-            },
-            legend: {
-                labels: {
-                    colors: grey500
-                }
-            }
-        };
-
-        // do not load chart when loading
-        if (!isLoading) {
-            ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData);
-        }
-    }, [navType, primary200, primaryDark, secondaryMain, secondaryLight, primary, darkLight, grey200, isLoading, grey500]);
 
     return (
         <>
@@ -163,7 +42,44 @@ const TotalGrowthBarChart = ({ isLoading, values }) => {
                             </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                            <Chart {...chartData} />
+                            <ResponsiveContainer width="100%" height={300}>
+                                <AreaChart margin={{ top: 20 }} data={values}>
+                                    {/* GRADIENTS SECTION */}
+                                    <defs>
+                                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor={theme.palette.secondary.light} stopOpacity={0.8} />
+                                            <stop offset="95%" stopColor={theme.palette.secondary.light} stopOpacity={0} />
+                                        </linearGradient>
+                                        <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor={theme.palette.secondary.main} stopOpacity={0.8} />
+                                            <stop offset="95%" stopColor={theme.palette.secondary.main} stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    {/* AXIS DEFINITION */}
+                                    <XAxis dataKey="name" axisLine={true} tickLine={true} />
+                                    <YAxis
+                                        allowDataOverflow={true}
+                                        allowDecimals={true}
+                                        dataKey="Earning"
+                                        axisLine={true}
+                                        tickLine={true}
+                                        tickFormatter={(v) => `$${(Math.round(v * 100) / 100).toFixed(2)}`}
+                                        // label={messages['charts.payments.y.label']}
+                                    />
+                                    <Tooltip labelStyle={{ color: 'black' }} />
+                                    {/* <Tooltip payload={data} /> */}
+                                    <Legend iconType="circle" />
+
+                                    <Area
+                                        dataKey="Earning"
+                                        type="monotone"
+                                        // dataKey='uv'
+                                        fillOpacity={1}
+                                        stroke={theme.palette.secondary.main}
+                                        fill={theme.palette.secondary.light}
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
                         </Grid>
                     </Grid>
                 </MainCard>
@@ -173,7 +89,8 @@ const TotalGrowthBarChart = ({ isLoading, values }) => {
 };
 
 TotalGrowthBarChart.propTypes = {
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    values: PropTypes.array.isRequired
 };
 
 export default TotalGrowthBarChart;

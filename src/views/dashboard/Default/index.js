@@ -20,17 +20,14 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
     const dispatch = useDispatch();
     //Selectors
-    const data = useSelector((state) => state.dashboard.data);
-    //States
-    const [dataState, setDataState] = useState(null);
+    const dataState = useSelector((state) => state.dashboard.data);
     useEffect(() => {
         setLoading(false);
         dispatch(loadDashBoardData());
     }, []);
-
     useEffect(() => {
-        if (data !== null) setDataState(data);
-    }, [data]);
+        console.log(dataState);
+    }, [dataState]);
 
     return (
         <Grid container spacing={gridSpacing}>
@@ -68,14 +65,8 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={8}>
-                        {dataState ? (
-                            dataState.earnings_per_month ? (
-                                <TotalGrowthBarChart isLoading={isLoading} values={dataState.earnings_per_month} />
-                            ) : (
-                                <></>
-                            )
-                        ) : (
-                            <></>
+                        {dataState && !isLoading && dataState?.earnings_per_month && (
+                            <TotalGrowthBarChart isLoading={isLoading} values={dataState?.earnings_per_month} />
                         )}
                     </Grid>
                     <Grid item xs={12} md={4}>

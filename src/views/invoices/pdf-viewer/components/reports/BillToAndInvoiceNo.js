@@ -65,10 +65,10 @@ const InvoiceNo = ({ data }) => (
                 {data.invoice_number.toString().length === 1
                     ? '000'
                     : data.invoice_number.toString().length === 2
-                    ? '00'
-                    : data.invoice_number.toString().length === 3
-                    ? '0'
-                    : ''}
+                      ? '00'
+                      : data.invoice_number.toString().length === 3
+                        ? '0'
+                        : ''}
                 {data.invoice_number}
             </Text>
         </View>
