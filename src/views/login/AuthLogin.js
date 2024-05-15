@@ -53,8 +53,8 @@ const AuthLogin = ({ ...others }) => {
         <>
             <Formik
                 initialValues={{
-                    username: '',
-                    password: '',
+                    username: 'demo_user',
+                    password: '12345678',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -145,9 +145,9 @@ const AuthLogin = ({ ...others }) => {
                                 }
                                 label="Remember me"
                             />
-                            <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+                            {/* <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
                                 Forgot Password?
-                            </Typography>
+                            </Typography> */}
                         </Stack>
                         {errors.submit ||
                             (auth.logFail && (

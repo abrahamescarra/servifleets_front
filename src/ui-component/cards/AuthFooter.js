@@ -7,12 +7,14 @@ const AuthFooter = () => (
     <Stack direction="row" justifyContent="center">
         <Typography
             variant="subtitle2"
+            fontSize={15}
+            mb={1}
             component={Link}
             href="https://github.com/abrahamescarra/abrahamescarra"
             target="_blank"
             underline="hover"
         >
-            Developer: "@abrahamescarra"
+            Developer: @<u>Abraham Escarra</u>
         </Typography>
     </Stack>
 );
