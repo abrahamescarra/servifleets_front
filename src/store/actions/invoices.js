@@ -16,7 +16,8 @@ import { UNAUTHORIZED } from './types/types_auth';
 
 import axios from 'axios';
 import { editLoad } from './loads';
-const url = 'https://api.servifleets.com/api/invoices/';
+import config from '../../config';
+const url = config.apiUrl + '/api/invoices/';
 
 export function loadInvoices() {
     return function (dispatch) {

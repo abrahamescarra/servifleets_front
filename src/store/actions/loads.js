@@ -12,7 +12,8 @@ import {
 } from '../actions/types/types_loads';
 import { UNAUTHORIZED } from './types/types_auth';
 import axios from 'axios';
-const url = 'https://api.servifleets.com/api/loads/';
+import config from '../../config';
+const url = config.apiUrl + '/api/loads/';
 
 export function loadLoads() {
     return function (dispatch) {
@@ -206,34 +207,6 @@ export function editLoad(load, id, inv) {
             });
     };
 }
-// export function loadLoadsInvoices() {
-//     return function (dispatch) {
-//         dispatch({
-//             type: LOADING_LOADS
-//         });
-//         const config = {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Authorization: `Token ${localStorage.getItem('token')}`
-//             }
-//         };
-//         axios
-//             .get('https://api.servifleets.com/api/non_invoice_loads', config)
-//             .then((res) => {
-//                 return dispatch({
-//                     type: LOAD_LOAD_INVOICES,
-//                     payload: res.data
-//                 });
-//             })
-//             .catch((err) => {
-//                 if (err.response.status === 401) {
-//                     return dispatch({ type: UNAUTHORIZED });
-//                 } else {
-//                     console.log(err);
-//                 }
-//             });
-//     };
-// }
 
 export function deleteLoad(id) {
     return function (dispatch) {

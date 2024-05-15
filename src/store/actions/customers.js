@@ -12,7 +12,8 @@ import {
 import { UNAUTHORIZED } from './types/types_auth';
 
 import axios from 'axios';
-const url = 'https://api.servifleets.com/api/customers/';
+import config from '../../config';
+const url = config.apiUrl + '/api/customers/';
 
 export function loadCustomers() {
     return function (dispatch) {

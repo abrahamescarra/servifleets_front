@@ -14,7 +14,8 @@ import {
 } from './types/types_drivers';
 import { UNAUTHORIZED } from './types/types_auth';
 import axios from 'axios';
-const url = 'https://api.servifleets.com/api/';
+import config from '../../config';
+const url = config.apiUrl + '/api/';
 
 export function loadDrivers() {
     return function (dispatch) {

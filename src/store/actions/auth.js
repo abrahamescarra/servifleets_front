@@ -10,7 +10,8 @@ import {
 } from '../actions/types/types_auth';
 
 import axios from 'axios';
-const url = 'https://api.servifleets.com/auth/';
+import config from '../../config';
+const url = config.apiUrl + '/auth/';
 
 export function login(data) {
     return function (dispatch) {

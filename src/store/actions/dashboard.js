@@ -1,7 +1,8 @@
 import { GET_DASHBOARD_DATA } from '../actions/types/types_dashboard';
 import { UNAUTHORIZED } from './types/types_auth';
 import axios from 'axios';
-
+import config from '../../config';
+const url = config.apiUrl + '/api/dashboard_data';
 export function loadDashBoardData() {
     return function (dispatch) {
         const config = {
@@ -11,7 +12,7 @@ export function loadDashBoardData() {
             }
         };
         axios
-            .get('https://api.servifleets.com/api/dashboard_data', config)
+            .get(url, config)
             .then((res) => {
                 return dispatch({
                     type: GET_DASHBOARD_DATA,

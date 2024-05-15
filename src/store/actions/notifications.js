@@ -2,9 +2,10 @@ import { LOAD_NOTIFICATIONS, LOADING_NOTIFICATIONS, MARK_READED, MARK_ALL_READED
 import { UNAUTHORIZED } from './types/types_auth';
 
 import axios from 'axios';
-const url = 'https://api.servifleets.com/api/notifications/';
-const url2 = 'https://api.servifleets.com/api/mark_read';
-const url3 = 'https://api.servifleets.com/api/mark_all_read';
+import config from '../../config';
+const url = config.apiUrl + '/api/notifications/';
+const url2 = config.apiUrl + '/api/mark_read';
+const url3 = config.apiUrl + '/api/mark_all_read';
 
 export function loadNotifications() {
     return function (dispatch) {

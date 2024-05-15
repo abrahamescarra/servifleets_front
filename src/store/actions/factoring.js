@@ -3,7 +3,8 @@ import { EDIT_FACTORING, GET_FACTORING, LOADING_FACTORING, ERROR_EDiTING_FACTORI
 import { UNAUTHORIZED } from './types/types_auth';
 
 import axios from 'axios';
-const url = 'https://api.servifleets.com/api/factoring/';
+import config from '../../config';
+const url = config.apiUrl + '/api/factoring/';
 
 export function getFactoring() {
     return function (dispatch) {

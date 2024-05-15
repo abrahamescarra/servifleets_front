@@ -53,12 +53,12 @@ const AuthLogin = ({ ...others }) => {
         <>
             <Formik
                 initialValues={{
-                    username: 'abraham',
-                    password: '12345678',
+                    username: '',
+                    password: '',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    username: Yup.string().max(15).required('Username is required'),
+                    username: Yup.string().max(150).required('Username is required'),
                     password: Yup.string().max(255).required('Password is required')
                 })}
                 onSubmit={async (values, { /* setErrors, setStatus, */ setSubmitting }) => {
