@@ -23,7 +23,7 @@ import {
     OutlinedInput
 } from '@mui/material';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from '@tabler/icons-react';
 import { shouldForwardProp } from '@mui/system';
 import { useTheme } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';

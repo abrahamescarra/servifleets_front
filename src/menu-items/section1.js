@@ -1,5 +1,5 @@
 // assets
-import { IconKey } from '@tabler/icons';
+import { IconKey } from '@tabler/icons-react';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';

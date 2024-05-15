@@ -19,12 +19,10 @@ import {
     DialogActions,
     ListItemSecondaryAction
 } from '@mui/material';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 // project imports
 import SubCard from 'ui-component/cards/SubCard';

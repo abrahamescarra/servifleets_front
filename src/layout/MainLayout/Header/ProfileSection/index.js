@@ -30,7 +30,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 
 // assets
-import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
+import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
 import { logout } from 'store/actions/auth';
 import { CHANGE_MODE } from 'store/actions';
 
@@ -103,7 +103,7 @@ const ProfileSection = () => {
                 }}
                 icon={
                     <Avatar
-                        src={user.logo ? user.logo : ''}
+                        src={user?.logo ? user.logo : ''}
                         sx={{
                             ...theme.typography.mediumAvatar,
                             margin: '8px 0 8px 8px !important',

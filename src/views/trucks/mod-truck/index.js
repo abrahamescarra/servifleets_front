@@ -19,11 +19,10 @@ import {
     DialogActions,
     ListItemSecondaryAction
 } from '@mui/material';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { useNavigate, useParams } from 'react-router';
 import { useTheme } from '@emotion/react';
 import { useSnackbar } from 'notistack';

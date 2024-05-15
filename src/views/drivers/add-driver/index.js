@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 import { Fab, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Select, MenuItem, Button } from '@mui/material';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import SubCard from 'ui-component/cards/SubCard';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';

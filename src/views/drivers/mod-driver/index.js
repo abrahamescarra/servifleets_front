@@ -27,9 +27,8 @@ import {
     ListItemText,
     ListItemSecondaryAction
 } from '@mui/material';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SubCard from 'ui-component/cards/SubCard';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';

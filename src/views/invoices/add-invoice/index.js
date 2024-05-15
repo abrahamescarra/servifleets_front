@@ -12,9 +12,8 @@ import { loadCustomers } from 'store/actions/customers';
 import { loadLoads } from 'store/actions/loads';
 import { convertToDefEventPara, formatDate } from 'extras/functions';
 
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate, useParams } from 'react-router';
 // ==============================|| CREATE TRUCK ||============================== //
 

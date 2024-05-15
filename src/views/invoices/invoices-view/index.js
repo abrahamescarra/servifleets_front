@@ -23,7 +23,7 @@ import {
     InputAdornment,
     OutlinedInput
 } from '@mui/material';
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from '@tabler/icons-react';
 import { shouldForwardProp } from '@mui/system';
 import { useTheme } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -194,10 +194,10 @@ const InvoicesView = () => {
                                     {row.id.toString().length === 1
                                         ? '000'
                                         : row.id.toString().length === 2
-                                        ? '00'
-                                        : row.id.toString().length === 3
-                                        ? '0'
-                                        : ''}
+                                          ? '00'
+                                          : row.id.toString().length === 3
+                                            ? '0'
+                                            : ''}
                                     {row.id}
                                 </StyledTableCell>
                                 <StyledTableCell>{row.service_date}</StyledTableCell>

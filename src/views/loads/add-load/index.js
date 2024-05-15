@@ -6,9 +6,8 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 import { Fab, Grid, TextField, Button, FormControl, FormLabel, Select, MenuItem } from '@mui/material';
 
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';

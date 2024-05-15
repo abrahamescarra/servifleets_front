@@ -19,7 +19,7 @@ export function loadDashBoardData() {
                 });
             })
             .catch((err) => {
-                if (err.response.status === 401) {
+                if (err?.response?.status === 401) {
                     return dispatch({ type: UNAUTHORIZED });
                 } else {
                     console.log(err);

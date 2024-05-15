@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 // third party
 import { BrowserRouter } from 'react-router-dom';
@@ -14,13 +14,13 @@ import 'assets/scss/style.scss';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+root.render(
     <Provider store={store}>
         <BrowserRouter>
             <SnackbarProvider maxSnack={3}>
                 <App />
             </SnackbarProvider>
         </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+    </Provider>
 );

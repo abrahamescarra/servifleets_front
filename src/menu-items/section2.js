@@ -1,5 +1,5 @@
 // assets
-import { IconKey } from '@tabler/icons';
+import { IconKey } from '@tabler/icons-react';
 
 import AirlineSeatReclineNormalOutlinedIcon from '@mui/icons-material/AirlineSeatReclineNormalOutlined';
 

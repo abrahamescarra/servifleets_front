@@ -28,7 +28,7 @@ import NotificationList from './NotificationList';
 
 import { useNavigate } from 'react-router-dom';
 // assets
-import { IconBell } from '@tabler/icons';
+import { IconBell } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { markAllReaded } from 'store/actions/notifications';
 

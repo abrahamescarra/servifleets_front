@@ -32,9 +32,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useSnackbar } from 'notistack';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate, useParams } from 'react-router';
 import { loadCustomers } from 'store/actions/customers';
 import { styled } from '@mui/material/styles';
@@ -324,10 +323,10 @@ const EditInvoice = () => {
                                         values.id.toString().length === 1
                                             ? `000${values.id}`
                                             : values.id.toString().length === 2
-                                            ? `00${values.id}`
-                                            : values.id.toString().length === 3
-                                            ? `0${values.id}`
-                                            : values.id
+                                              ? `00${values.id}`
+                                              : values.id.toString().length === 3
+                                                ? `0${values.id}`
+                                                : values.id
                                     }
                                 />
                             </Grid>
