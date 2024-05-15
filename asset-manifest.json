@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/servifleets_front/static/css/main.e9da86e7.css",
+    "main.js": "/servifleets_front/static/js/main.75246297.js",
+    "static/media/logoonly.svg": "/servifleets_front/static/media/logoonly.d8eab29d6d6b1e5777920fd39f336b2d.svg",
+    "index.html": "/servifleets_front/index.html",
+    "main.e9da86e7.css.map": "/servifleets_front/static/css/main.e9da86e7.css.map",
+    "main.75246297.js.map": "/servifleets_front/static/js/main.75246297.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e9da86e7.css",
+    "static/js/main.75246297.js"
+  ]
+}
