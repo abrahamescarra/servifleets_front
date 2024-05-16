@@ -115,7 +115,7 @@ const Profile = () => {
             setPassErrors({ ...pass_errors, password2: "Passwords don't match" });
             return;
         }
-        dispatch(changePass(passwordValues));
+        // dispatch(changePass(passwordValues));
         setPasswordValues(initialPass);
         changePassword('');
     };

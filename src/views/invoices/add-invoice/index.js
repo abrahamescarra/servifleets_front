@@ -12,8 +12,6 @@ import { loadCustomers } from 'store/actions/customers';
 import { loadLoads } from 'store/actions/loads';
 import { convertToDefEventPara, formatDate } from 'extras/functions';
 
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useNavigate, useParams } from 'react-router';
 // ==============================|| CREATE TRUCK ||============================== //
 
@@ -67,7 +65,7 @@ const AddInvoice = () => {
             setErrors({ ...errors, notes: 'This Field is Required' });
             return;
         }
-        dispatch(addInvoice({ ...values, service_date: formatDate(values.service_date) }, load));
+        dispatch(addInvoice(values, load));
     };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -185,24 +183,18 @@ const AddInvoice = () => {
                         </FormControl>
                     </Grid>
                     <Grid item display="flex" justifyContent="center" mb={2} xs={12}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="Service Date"
-                                value={values.service_date}
-                                inputFormat="dd/MM/yyyy"
-                                onChange={(date) => handleInputChange(convertToDefEventPara('service_date', date))}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        error={Boolean(errors.service_date)}
-                                        name="service_date"
-                                        helperText={errors.service_date ? errors.service_date : ''}
-                                        fullWidth
-                                        required
-                                    />
-                                )}
-                            />
-                        </LocalizationProvider>
+                        <TextField
+                            error={Boolean(errors.service_date)}
+                            helperText={errors.service_date ? errors.service_date : ''}
+                            name="service_date"
+                            fullWidth
+                            required
+                            type="date"
+                            label="Service Date"
+                            value={values.service_date}
+                            InputLabelProps={{ shrink: true, required: true }}
+                            onChange={handleInputChange}
+                        />
                     </Grid>
 
                     <Grid item xs={12} mb={2}>

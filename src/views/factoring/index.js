@@ -92,7 +92,7 @@ const Factoring = () => {
     }, [errorsSelect]);
 
     useEffect(() => {
-        if (loading === false && factoring !== null)
+        if (loading === false && factoring)
             setValues({
                 name: factoring.name === 'Empty' ? '' : factoring.name,
                 address: factoring.address === 'Empty' ? '' : factoring.address,

@@ -10,18 +10,6 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 const TotalGrowthBarChart = ({ isLoading, values }) => {
     const theme = useTheme();
-    const customization = useSelector((state) => state.customization);
-    const darkMode = useSelector((state) => state.customization.dark);
-
-    const { primary } = theme.palette.text;
-    const darkLight = darkMode ? theme.palette.grey[500] : theme.palette.dark;
-    const grey200 = theme.palette.grey[200];
-    const grey500 = theme.palette.grey[500];
-
-    const primary200 = darkMode ? theme.palette.primary.light : theme.palette.primary[200];
-    const primaryDark = theme.palette.primary.dark;
-    const secondaryMain = theme.palette.secondary.main;
-    const secondaryLight = theme.palette.secondary.light;
 
     return (
         <>
@@ -42,7 +30,7 @@ const TotalGrowthBarChart = ({ isLoading, values }) => {
                             </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                            <ResponsiveContainer width="100%" height={300}>
+                            <ResponsiveContainer width="100%" height={315}>
                                 <AreaChart margin={{ top: 20 }} data={values}>
                                     {/* GRADIENTS SECTION */}
                                     <defs>
