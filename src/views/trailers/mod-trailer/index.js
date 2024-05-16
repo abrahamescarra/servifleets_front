@@ -19,20 +19,18 @@ import {
     DialogActions,
     ListItemSecondaryAction
 } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 // project imports
 import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
-import { convertToDefEventPara, formatDate } from 'extras/functions';
 import { addMaintenance, deleteMaintenance, editTrailer, getTrailer, loadMaintenances } from 'store/actions/trailers';
 import { useNavigate, useParams } from 'react-router';
 import { useTheme } from '@emotion/react';
 import { useSnackbar } from 'notistack';
 import { CLEAN_MODIFIED, RESET_ERRORS } from 'store/actions/types/types_trailers';
+import { formatDateForTextField } from 'extras/functions';
 
 // ==============================|| EDIT TRAILER ||============================== //
 
@@ -81,10 +79,6 @@ const ModTrailers = () => {
     }, []);
     useEffect(() => {
         if (loading === false && trailer !== null) {
-            let registration_exp = new Date(trailer.registration_exp);
-            registration_exp.setDate(registration_exp.getDate() + 1);
-            let annual_insp_exp = new Date(trailer.annual_insp_exp);
-            annual_insp_exp.setDate(annual_insp_exp.getDate() + 1);
             setValues({
                 ...values,
                 number: trailer.number,
@@ -93,8 +87,8 @@ const ModTrailers = () => {
                 typ: trailer.typ,
                 length: trailer.length,
                 vin_number: trailer.vin_number,
-                registration_exp: registration_exp,
-                annual_insp_exp: annual_insp_exp,
+                registration_exp: formatDateForTextField(new Date(trailer.registration_exp)),
+                annual_insp_exp: formatDateForTextField(new Date(trailer.annual_insp_exp)),
                 annual_inspection: { name: trailer.annual_inspection === null ? '' : trailer.annual_inspection },
                 registration: { name: trailer.registration === null ? '' : trailer.registration }
             });
@@ -188,8 +182,8 @@ const ModTrailers = () => {
             vin_number: values.vin_number,
             registration: regist_exp,
             annual_inspection: ann_inspect,
-            registration_exp: formatDate(values.registration_exp),
-            annual_insp_exp: formatDate(values.annual_insp_exp)
+            registration_exp: values.registration_exp,
+            annual_insp_exp: values.annual_insp_exp
         };
         dispatch(editTrailer(trailerObj, trailer.id));
     };
@@ -308,45 +302,33 @@ const ModTrailers = () => {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={5} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        label="Annual Inspection Expiration"
-                                        value={values.annual_insp_exp}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('annual_insp_exp', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.annual_insp_exp)}
-                                                name="annual_insp_exp"
-                                                helperText={errors.annual_insp_exp ? errors.annual_insp_exp : ''}
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.annual_insp_exp)}
+                                    helperText={errors.annual_insp_exp ? errors.annual_insp_exp : ''}
+                                    name="annual_insp_exp"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Annual Inspection Expiration"
+                                    value={values.annual_insp_exp}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={2} />
                             <Grid item xs={12} sm={5} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        label="Registration Expiration"
-                                        value={values.registration_exp}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('registration_exp', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.registration_exp)}
-                                                name="registration_exp"
-                                                helperText={errors.registration_exp ? errors.registration_exp : ''}
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.registration_exp)}
+                                    helperText={errors.registration_exp ? errors.registration_exp : ''}
+                                    name="registration_exp"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Registration Expiration"
+                                    value={values.registration_exp}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={11} sm={4} mb={2} component="a" target="_blank" href={values.registration}>
                                 <TextField

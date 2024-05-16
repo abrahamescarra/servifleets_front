@@ -27,8 +27,6 @@ import {
     ListItemText,
     ListItemSecondaryAction
 } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import SubCard from 'ui-component/cards/SubCard';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -36,7 +34,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { stateList } from 'extras/stateList';
-import { convertToDefEventPara, formatDate } from 'extras/functions';
+import { convertToDefEventPara, formatDate, formatDateForTextField } from 'extras/functions';
 import { addRandomTest, deleteRandomTest, editDriver, getDriver, loadRandomTests } from 'store/actions/drivers';
 import { loadTrucks } from 'store/actions/trucks';
 import { useTheme } from '@emotion/react';
@@ -123,12 +121,6 @@ const EditDriver = () => {
 
     useEffect(() => {
         if (loading === false && driver !== null) {
-            let hired_date = new Date(driver.hired_date);
-            hired_date.setDate(hired_date.getDate() + 1);
-            let license_exp = new Date(driver.license_exp);
-            license_exp.setDate(license_exp.getDate() + 1);
-            let medcard_exp = new Date(driver.medcard_exp);
-            medcard_exp.setDate(medcard_exp.getDate() + 1);
             setValues({
                 ...values,
                 full_name: driver.full_name,
@@ -141,9 +133,9 @@ const EditDriver = () => {
                 zip_code: driver.zip_code,
                 legal_status: driver.legal_status,
                 truck: driver.truck ? driver.truck : 'house',
-                hired_date: hired_date,
-                license_exp: license_exp,
-                medcard_exp: medcard_exp,
+                hired_date: formatDateForTextField(new Date(driver.hired_date)),
+                license_exp: formatDateForTextField(new Date(driver.license_exp)),
+                medcard_exp: formatDateForTextField(new Date(driver.medcard_exp)),
                 proof_cit: { name: driver.proof_cit === null ? '' : driver.proof_cit },
                 void_check: { name: driver.void_check === null ? '' : driver.void_check },
                 mvr: { name: driver.mvr === null ? '' : driver.mvr },
@@ -317,10 +309,7 @@ const EditDriver = () => {
                 application: application,
                 w9: w9,
                 lic_agreement: lic_agreement,
-                ifta: ifta,
-                license_exp: formatDate(values.license_exp),
-                medcard_exp: formatDate(values.medcard_exp),
-                hired_date: formatDate(values.hired_date)
+                ifta: ifta
             };
         } else {
             driverMod = {
@@ -336,10 +325,7 @@ const EditDriver = () => {
                 application: application,
                 w9: w9,
                 lic_agreement: lic_agreement,
-                ifta: ifta,
-                license_exp: formatDate(values.license_exp),
-                medcard_exp: formatDate(values.medcard_exp),
-                hired_date: formatDate(values.hired_date)
+                ifta: ifta
             };
         }
         dispatch(editDriver(driverMod, id));
@@ -497,64 +483,46 @@ const EditDriver = () => {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        inputFormat="dd/MM/yyyy"
-                                        label="Hired Date"
-                                        value={values.hired_date}
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('hired_date', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.hired_date)}
-                                                helperText={errors.hired_date ? errors.hired_date : ''}
-                                                name="hired_date"
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.hired_date)}
+                                    helperText={errors.hired_date ? errors.hired_date : ''}
+                                    name="hired_date"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Hired Date"
+                                    value={values.hired_date}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={12} sm={4} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        inputFormat="dd/MM/yyyy"
-                                        label="License Expiration"
-                                        value={values.license_exp}
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('license_exp', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.license_exp)}
-                                                helperText={errors.license_exp ? errors.license_exp : ''}
-                                                name="license_exp"
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.license_exp)}
+                                    helperText={errors.license_exp ? errors.license_exp : ''}
+                                    name="license_exp"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="License Expiration"
+                                    value={values.license_exp}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={12} sm={4} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        inputFormat="dd/MM/yyyy"
-                                        label="Medcard Expiration"
-                                        value={values.medcard_exp}
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('medcard_exp', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.medcard_exp)}
-                                                helperText={errors.medcard_exp ? errors.medcard_exp : ''}
-                                                name="medcard_exp"
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.medcard_exp)}
+                                    helperText={errors.medcard_exp ? errors.medcard_exp : ''}
+                                    name="medcard_exp"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Medcard Expiration"
+                                    value={values.medcard_exp}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={12} mb={2}>
                                 <TextField

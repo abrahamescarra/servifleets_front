@@ -5,12 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 import { Grid, TextField, Button, Fab } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import { convertToDefEventPara, formatDate } from 'extras/functions';
 import { addTrailer } from 'store/actions/trailers';
 import { useSnackbar } from 'notistack';
 import { CLEAN_MODIFIED, RESET_ERRORS } from 'store/actions/types/types_trailers';
@@ -97,8 +93,8 @@ const AddTrailers = () => {
             length: values.length,
             registration: regist_exp,
             annual_inspection: ann_inspect,
-            registration_exp: formatDate(values.registration_exp),
-            annual_insp_exp: formatDate(values.annual_insp_exp)
+            registration_exp: values.registration_exp,
+            annual_insp_exp: values.annual_insp_exp
         };
         dispatch(addTrailer(trailer, maint));
     };
@@ -236,45 +232,33 @@ const AddTrailers = () => {
                         />
                     </Grid>
                     <Grid item xs={12} sm={5} mb={2}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="Annual Inspection Expiration"
-                                value={values.annual_insp_exp}
-                                inputFormat="dd/MM/yyyy"
-                                onChange={(date) => handleInputChange(convertToDefEventPara('annual_insp_exp', date))}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        error={Boolean(errors.annual_insp_exp)}
-                                        name="annual_insp_exp"
-                                        helperText={errors.annual_insp_exp ? errors.annual_insp_exp : ''}
-                                        fullWidth
-                                        required
-                                    />
-                                )}
-                            />
-                        </LocalizationProvider>
+                        <TextField
+                            error={Boolean(errors.annual_insp_exp)}
+                            helperText={errors.annual_insp_exp ? errors.annual_insp_exp : ''}
+                            name="annual_insp_exp"
+                            fullWidth
+                            required
+                            type="date"
+                            label="Annual Inspection Expiration"
+                            value={values.annual_insp_exp}
+                            InputLabelProps={{ shrink: true, required: true }}
+                            onChange={handleInputChange}
+                        />
                     </Grid>
                     <Grid item xs={2} />
                     <Grid item xs={12} sm={5} mb={2}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="Registration Expiration"
-                                value={values.registration_exp}
-                                inputFormat="dd/MM/yyyy"
-                                onChange={(date) => handleInputChange(convertToDefEventPara('registration_exp', date))}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        error={Boolean(errors.registration_exp)}
-                                        name="registration_exp"
-                                        helperText={errors.registration_exp ? errors.registration_exp : ''}
-                                        fullWidth
-                                        required
-                                    />
-                                )}
-                            />
-                        </LocalizationProvider>
+                        <TextField
+                            error={Boolean(errors.registration_exp)}
+                            helperText={errors.registration_exp ? errors.registration_exp : ''}
+                            name="registration_exp"
+                            fullWidth
+                            required
+                            type="date"
+                            label="Registration Expiration"
+                            value={values.registration_exp}
+                            InputLabelProps={{ shrink: true, required: true }}
+                            onChange={handleInputChange}
+                        />
                     </Grid>
                     <Grid item xs={11} sm={4} mb={2}>
                         <TextField

@@ -6,12 +6,8 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 import { Fab, Grid, TextField, Button, FormControl, FormLabel, Select, MenuItem } from '@mui/material';
 
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import { convertToDefEventPara, formatDate } from 'extras/functions';
 import { addLoad } from 'store/actions/loads';
 import { loadTrucks } from 'store/actions/trucks';
 import { loadDrivers } from 'store/actions/drivers';
@@ -149,18 +145,14 @@ const AddLoads = () => {
                 confirmation: confirmation,
                 bol: bol,
                 truck: '',
-                house_driver: true,
-                pickup_date: formatDate(values.pickup_date),
-                delivery_date: formatDate(values.delivery_date)
+                house_driver: true
             };
         } else {
             load = {
                 ...values,
                 confirmation: confirmation,
                 bol: bol,
-                house_driver: false,
-                pickup_date: formatDate(values.pickup_date),
-                delivery_date: formatDate(values.delivery_date)
+                house_driver: false
             };
         }
         dispatch(addLoad(load));
@@ -374,45 +366,33 @@ const AddLoads = () => {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={5} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        label="Pickup Date"
-                                        value={values.pickup_date}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('pickup_date', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.pickup_date)}
-                                                name="pickup_date"
-                                                helperText={errors.pickup_date ? errors.pickup_date : ''}
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.pickup_date)}
+                                    helperText={errors.pickup_date ? errors.pickup_date : ''}
+                                    name="pickup_date"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Pickup Date"
+                                    value={values.pickup_date}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={2} />
                             <Grid item xs={12} sm={5} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        label="Delivery Date"
-                                        value={values.delivery_date}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('delivery_date', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.delivery_date)}
-                                                name="delivery_date"
-                                                helperText={errors.delivery_date ? errors.delivery_date : ''}
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.delivery_date)}
+                                    helperText={errors.delivery_date ? errors.delivery_date : ''}
+                                    name="delivery_date"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Delivery Date"
+                                    value={values.delivery_date}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
                             <Grid item xs={11} sm={4} mb={2}>
                                 <TextField

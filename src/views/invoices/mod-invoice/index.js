@@ -32,8 +32,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useSnackbar } from 'notistack';
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useNavigate, useParams } from 'react-router';
 import { loadCustomers } from 'store/actions/customers';
 import { styled } from '@mui/material/styles';
@@ -45,7 +43,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import { editInvoice, getAllDataInvoice, getInvoice, sendFactoringInvoice, sendInvoice } from 'store/actions/invoices';
 import { CLEAN_MODIFIED_INVOICES, RESET_ERRORS_INVOICES } from 'store/actions/types/types_invoices';
 import { loadLoads } from 'store/actions/loads';
-import { convertToDefEventPara, formatDate } from 'extras/functions';
+import { formatDateForTextField } from 'extras/functions';
 import { addService, deleteService, loadServices } from 'store/actions/services';
 import { CLEAN_MODIFIED, RESET_ERRORS } from 'store/actions/types/types_services';
 import { usePDF } from '@react-pdf/renderer';
@@ -180,16 +178,12 @@ const EditInvoice = () => {
     }, [errorsSelectServices]);
     useEffect(() => {
         if (invoice !== null) {
-            let invoice_date = new Date(invoice.invoice_date);
-            invoice_date.setDate(invoice_date.getDate() + 1);
-            let service_date = new Date(invoice.service_date);
-            service_date.setDate(service_date.getDate() + 1);
             setValues({
                 id: invoice.id,
                 load: invoice.load,
                 customer: invoice.customer,
-                invoice_date: invoice_date,
-                service_date: service_date,
+                invoice_date: formatDateForTextField(new Date(invoice.invoice_date)),
+                service_date: formatDateForTextField(new Date(invoice.service_date)),
                 paid: invoice.paid,
                 notes: invoice.notes
             });
@@ -253,7 +247,7 @@ const EditInvoice = () => {
             setErrors({ ...errors, notes: 'This Field is Required' });
             return;
         }
-        dispatch(editInvoice({ ...values, service_date: formatDate(values.service_date) }, invoice.id, false));
+        dispatch(editInvoice(values, invoice.id, false));
     };
     const handleSubmitServices = (e) => {
         e.preventDefault();
@@ -380,47 +374,34 @@ const EditInvoice = () => {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={5} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        disabled
-                                        label="Invoice Date"
-                                        value={values.invoice_date}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('invoice_date', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.invoice_date)}
-                                                name="invoice_date"
-                                                helperText={errors.invoice_date ? errors.invoice_date : ''}
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.invoice_date)}
+                                    helperText={errors.invoice_date ? errors.invoice_date : ''}
+                                    name="invoice_date"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Invoice Date"
+                                    value={values.invoice_date}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
 
                             <Grid item xs={2} />
                             <Grid item xs={12} sm={5} mb={2}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        label="Service Date"
-                                        value={values.service_date}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(date) => handleInputChange(convertToDefEventPara('service_date', date))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                error={Boolean(errors.service_date)}
-                                                name="service_date"
-                                                helperText={errors.service_date ? errors.service_date : ''}
-                                                fullWidth
-                                                required
-                                            />
-                                        )}
-                                    />
-                                </LocalizationProvider>
+                                <TextField
+                                    error={Boolean(errors.service_date)}
+                                    helperText={errors.service_date ? errors.service_date : ''}
+                                    name="service_date"
+                                    fullWidth
+                                    required
+                                    type="date"
+                                    label="Service Date"
+                                    value={values.service_date}
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    onChange={handleInputChange}
+                                />
                             </Grid>
 
                             <Grid item xs={12} mb={2}>
