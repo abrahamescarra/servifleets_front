@@ -3,7 +3,7 @@ const config = {
     // like '/berry-material-react/react/default'
     basename: '',
     defaultPath: '/dashboard/default',
-    apiUrl: 'http://localhost:8000',
+    apiUrl: 'https://api.servifleets.abrahamescarra.com',
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 12
 };
